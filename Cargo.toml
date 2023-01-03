@@ -16,3 +16,4 @@ log = "0.4.14"
 fern = "0.6.0"
 home = "0.5.3"
 iced = {version="0.6.0",features = ["image","tokio"]}
+rust-embed = {version = "6.4.2"}

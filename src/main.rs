@@ -1,10 +1,11 @@
-
 use iced::widget::image::Handle;
 use iced::widget::{button, container, image, text, Column, Row};
+use iced::window::Icon;
 use iced::{
     executor, Alignment, Application, Command, Element, Executor, Length, Renderer, Settings, Theme,
 };
 use log::info;
+use rust_embed::{EmbeddedFile, RustEmbed};
 use serde::{Deserialize, Serialize};
 use std::fs;
 use std::fs::File;
@@ -14,10 +15,21 @@ use std::path::PathBuf;
 
 mod env;
 
+#[derive(RustEmbed)]
+#[folder = "src/asset"]
+struct Asset;
+
+fn get_icon_file() -> EmbeddedFile {
+    let file = Asset::get("Fries.png").unwrap();
+    file
+}
+
 fn main() {
     env::setup_logger().unwrap();
     let mut settings = Settings::default();
     settings.window.size = (1000, 640);
+    let cow = get_icon_file().data;
+    settings.window.icon = Some(Icon::from_file_data(&*cow, None).unwrap());
     TrayMat::run(settings).unwrap();
 }
 

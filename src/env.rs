@@ -1,6 +1,6 @@
-use log::{debug, error, info, trace, warn};
-use std::path::{Path, PathBuf};
-use std::{env, fs};
+
+
+use std::{fs};
 
 pub fn setup_logger() -> Result<(), fern::InitError> {
     let log_path = get_log_path();

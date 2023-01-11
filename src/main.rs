@@ -123,7 +123,9 @@ impl Application for TrayMat {
         let btn_width = Length::Units(110);
         if self.images.len() > 0 {
             let handle = Wallpaper::get_image_handle(&self.images, self.position).unwrap();
-            let image_viewer = image::viewer(handle);
+            let image_viewer = image::viewer(handle)
+                .min_scale(1 as f32)
+                .max_scale(1 as f32);
             let image_content = Row::new()
                 .push(image_viewer)
                 .spacing(20)
@@ -141,9 +143,9 @@ impl Application for TrayMat {
                 .width(btn_width)
                 .on_press(Message::LastMessage);
             let btn_row = Row::new()
-                .push(next_btn)
-                .push(set_btn)
                 .push(last_btn)
+                .push(set_btn)
+                .push(next_btn)
                 .spacing(20)
                 .align_items(Alignment::Fill);
 
